@@ -6,6 +6,7 @@ import {
   SafeAreaView,
   FlatList,
   Button,
+  Image,
 } from "react-native";
 import { useCallback } from "react";
 import { useFonts } from "expo-font";
@@ -27,9 +28,18 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Wow, Awesome Project finally there!</Text>
-      <Button title="Navigate" onPress={() => console.log("Button pressed!")} />
       <StatusBar style="auto" />
+      <>
+        <Image
+          source={require("../AwesomeProject/images/Bg.png")}
+          resizeMode="cover"
+          style={styles.image}
+        />
+      </>
+      <Text style={styles.text}>
+        Awesome! My first React Native Screen finally there!
+      </Text>
+      <Button title="Navigate" onPress={() => console.log("Button pressed!")} />
     </View>
   );
 }
@@ -37,8 +47,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    gap: 32,
-    padding: 48,
+    padding: 8,
     backgroundColor: "#eaeaea",
     alignItems: "center",
     justifyContent: "center",
@@ -46,7 +55,8 @@ const styles = StyleSheet.create({
   text: {
     fontFamily: "Roboto-SemiBold",
     fontSize: 20,
-    color: "#20232a",
+    color: "#fff",
+    padding: 24,
   },
   title: {
     marginTop: 16,
@@ -59,6 +69,13 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 30,
     fontWeight: "bold",
+  },
+  image: {
+    position: "absolute",
+    top: 0,
+    bottom: 0,
+    height: "100%",
+    width: "100%",
   },
 });
 

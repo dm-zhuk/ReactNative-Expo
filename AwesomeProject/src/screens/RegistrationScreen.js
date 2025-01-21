@@ -14,7 +14,19 @@ import {
 } from "react-native";
 import { colors } from "../../styles/global";
 
-const RegistrationScreen = () => {};
+const RegistrationScreen = () => {
+  return (
+    <View style={styles.container}>
+      <>
+        <Image
+          source={require("../AwesomeProject/images/Bg.png")}
+          resizeMode="cover"
+          style={styles.image}
+        />
+      </>
+    </View>
+  );
+};
 
 export default RegistrationScreen;
 
@@ -32,5 +44,12 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     marginTop: 42,
+  },
+  image: {
+    position: "absolute",
+    top: 0,
+    bottom: 0,
+    height: "100%",
+    width: "100%",
   },
 });

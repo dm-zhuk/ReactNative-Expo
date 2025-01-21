@@ -1,8 +1,8 @@
 import { ActivityIndicator, StyleSheet, View } from "react-native";
 import { useState } from "react";
 import { useFonts } from "expo-font";
-import RegistrationScreen from "./src/screens/Registration/RegistrationScreen";
-import LogInScreen from "./src/screens/LogIn/LogInScreen";
+import RegistrationScreen from "./src/Screens/Registration/RegistrationScreen";
+import LoginScreen from "./src/Screens/Login/LoginScreen";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -14,6 +14,8 @@ export default function App() {
     "Roboto-Italic": require("./assets/fonts/Roboto-Italic.ttf"),
   });
 
+  const [isLogin, setIsLogin] = useState(false);
+
   if (!fontsLoaded) {
     return (
       <View style={styles.loader}>
@@ -22,15 +24,13 @@ export default function App() {
     );
   }
 
-  const [isLogin, setIsLogin] = useState(false);
-
   const goToLogin = () => setIsLogin(true);
   const goToRegistration = () => setIsLogin(false);
 
   return (
     <>
       {isLogin ? (
-        <LogInScreen goToRegistration={goToRegistration} />
+        <LoginScreen goToRegistration={goToRegistration} />
       ) : (
         <RegistrationScreen goToLogin={goToLogin} />
       )}

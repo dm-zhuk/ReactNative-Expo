@@ -1,8 +1,12 @@
 import { ActivityIndicator, StyleSheet, View } from "react-native";
+import { useEffect } from "react";
 import { useState } from "react";
 import { useFonts } from "expo-font";
-import RegistrationScreen from "./src/Screens/Registration/RegistrationScreen";
-import LoginScreen from "./src/Screens/Login/LoginScreen";
+import * as SplashScreen from "expo-splash-screen";
+import RegistrationScreen from "./screens/RegistrationScreen";
+import LoginScreen from "./screens/LoginScreen";
+
+SplashScreen.preventAutoHideAsync();
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -14,9 +18,20 @@ export default function App() {
     "Roboto-Italic": require("./assets/fonts/Roboto-Italic.ttf"),
   });
 
-  const [isLogin, setIsLogin] = useState(false);
+  useEffect(() => {
+    if (fontsLoaded) {
+      SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded]);
 
   if (!fontsLoaded) {
+    return <ActivityIndicator size="large" />;
+  }
+
+  return <RegistrationScreen />;
+}
+
+/* if (!fontsLoaded) {
     return (
       <View style={styles.loader}>
         <ActivityIndicator size="large" />
@@ -24,6 +39,7 @@ export default function App() {
     );
   }
 
+  const [isLogin, setIsLogin] = useState(false);
   const goToLogin = () => setIsLogin(true);
   const goToRegistration = () => setIsLogin(false);
 
@@ -36,7 +52,7 @@ export default function App() {
       )}
     </>
   );
-}
+} */
 
 const styles = StyleSheet.create({
   loader: {

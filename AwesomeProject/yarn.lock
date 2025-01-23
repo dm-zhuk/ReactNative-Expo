@@ -1602,6 +1602,11 @@
   dependencies:
     "@babel/types" "^7.20.7"
 
+"@types/geojson@^7946.0.13":
+  version "7946.0.16"
+  resolved "https://registry.yarnpkg.com/@types/geojson/-/geojson-7946.0.16.tgz#8ebe53d69efada7044454e3305c19017d97ced2a"
+  integrity sha512-6C8nqWur3j98U6+lXDfTUWIfgvZU+EumvpHKcYjujKH7woYyLj2sUmff0tRhrqM7BohUw7Pz3ZB1jj2gW9Fvmg==
+
 "@types/graceful-fs@^4.1.3":
   version "4.1.9"
   resolved "https://registry.npmjs.org/@types/graceful-fs/-/graceful-fs-4.1.9.tgz"
@@ -3276,6 +3281,13 @@ expo-asset@~11.0.2:
     invariant "^2.2.4"
     md5-file "^3.2.3"
 
+expo-camera@^16.0.14:
+  version "16.0.14"
+  resolved "https://registry.yarnpkg.com/expo-camera/-/expo-camera-16.0.14.tgz#928015c6b0b29dcdcb8ebc948ef6290704d6daf0"
+  integrity sha512-nTQjb3Vtp0rA40fQdGLO+YCg7kHigBs9J4LkAXiL7Gsjl8lxYgFqHCCrFLOm/4D2TJSnqHSGQQflzwoWQDpZzw==
+  dependencies:
+    invariant "^2.2.4"
+
 expo-constants@~17.0.4:
   version "17.0.4"
   resolved "https://registry.npmjs.org/expo-constants/-/expo-constants-17.0.4.tgz"
@@ -3298,15 +3310,32 @@ expo-font@^13.0.3, expo-font@~13.0.3:
   dependencies:
     fontfaceobserver "^2.1.0"
 
+expo-image-loader@~5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/expo-image-loader/-/expo-image-loader-5.0.0.tgz#4f58a21ab26e40d6fccc211b664fd9fe21a5dcb8"
+  integrity sha512-Eg+5FHtyzv3Jjw9dHwu2pWy4xjf8fu3V0Asyy42kO+t/FbvW/vjUixpTjPtgKQLQh+2/9Nk4JjFDV6FwCnF2ZA==
+
+expo-image-picker@^16.0.4:
+  version "16.0.4"
+  resolved "https://registry.yarnpkg.com/expo-image-picker/-/expo-image-picker-16.0.4.tgz#f4f1e8cf5453c08c2622aafe3f139b846b261d7e"
+  integrity sha512-LeTdQxL+kS8wiFOf+mTxDZmr0Ok3KwcpvCaDnXwCdCQuszVd4sSml7lg+oaJfkWj793u74M+8j0hQaEDHCgkxg==
+  dependencies:
+    expo-image-loader "~5.0.0"
+
 expo-keep-awake@~14.0.2:
   version "14.0.2"
   resolved "https://registry.npmjs.org/expo-keep-awake/-/expo-keep-awake-14.0.2.tgz"
   integrity sha512-71XAMnoWjKZrN8J7Q3+u0l9Ytp4OfhNAYz8BCWF1/9aFUw09J3I7Z5DuI3MUsVMa/KWi+XhG+eDUFP8cVA19Uw==
 
-expo-modules-autolinking@2.0.6:
-  version "2.0.6"
-  resolved "https://registry.npmjs.org/expo-modules-autolinking/-/expo-modules-autolinking-2.0.6.tgz"
-  integrity sha512-E5G0t9kQ3i69uOD/nbU9MKrrLE7kl0DcfXOUmmRu6zskQ90kyg7eBXoxtg9C59oQCCXiQrNoBhEZCnAIKgI1og==
+expo-media-library@^17.0.5:
+  version "17.0.5"
+  resolved "https://registry.yarnpkg.com/expo-media-library/-/expo-media-library-17.0.5.tgz#26413b3486f8fddd75b71306eb1ccf9c2c0779aa"
+  integrity sha512-AHfaaNvvHtIu5X51tqp4VvwlBTtMCLeFiYLbrNxUklSop0JA2fDyZrPhtRdMGrp/wtu3gvay2NDKAp3JzczOzw==
+
+expo-modules-autolinking@2.0.7:
+  version "2.0.7"
+  resolved "https://registry.yarnpkg.com/expo-modules-autolinking/-/expo-modules-autolinking-2.0.7.tgz#fc40ba7505f42f971253ea20a927693f2c123a56"
+  integrity sha512-rkGc6a/90AC3q8wSy4V+iIpq6Fd0KXmQICKrvfmSWwrMgJmLfwP4QTrvLYPYOOMjFwNJcTaohcH8vzW/wYKrMg==
   dependencies:
     "@expo/spawn-async" "^1.7.2"
     chalk "^4.1.0"
@@ -3324,15 +3353,22 @@ expo-modules-core@2.1.4:
   dependencies:
     invariant "^2.2.4"
 
+expo-splash-screen@^0.29.21:
+  version "0.29.21"
+  resolved "https://registry.yarnpkg.com/expo-splash-screen/-/expo-splash-screen-0.29.21.tgz#f97677130ad11ba238ce31acc4280edaf4f1de88"
+  integrity sha512-7uZ+qvIuNcvrvrLIklW+Wbt6llPuCj6LKYjrMu+GOX8s///laldS4TGiMAbqcE7fmfCzQ8ffgfY7xhxRourhcA==
+  dependencies:
+    "@expo/prebuild-config" "^8.0.25"
+
 expo-status-bar@~2.0.1:
   version "2.0.1"
   resolved "https://registry.npmjs.org/expo-status-bar/-/expo-status-bar-2.0.1.tgz"
   integrity sha512-AkIPX7jWHRPp83UBZ1iXtVvyr0g+DgBVvIXTtlmPtmUsm8Vq9Bb5IGj86PW8osuFlgoTVAg7HI/+Ok7yEYwiRg==
 
-expo@~52.0.26:
-  version "52.0.26"
-  resolved "https://registry.npmjs.org/expo/-/expo-52.0.26.tgz"
-  integrity sha512-9osjHwAyLxCexnLEJXaZDZowbQl7IHqeMOcx90xwMQp2O/5XP+3T7uPK0sNdjlEO05QzAv0k4oXAKMRr5gdEqg==
+expo@^52.0.27:
+  version "52.0.27"
+  resolved "https://registry.yarnpkg.com/expo/-/expo-52.0.27.tgz#9eeceda4990ee5a78a66d3f2c26122118ba9454c"
+  integrity sha512-PxIS8JRTegUNYq4vNeP0eCqm7p17oGNYjJ/9x207zkwVlklywD9LYIckGojXEY5JPW/DwhbhtO6E2hMgdQQugg==
   dependencies:
     "@babel/runtime" "^7.20.0"
     "@expo/cli" "0.22.10"
@@ -3347,7 +3383,7 @@ expo@~52.0.26:
     expo-file-system "~18.0.7"
     expo-font "~13.0.3"
     expo-keep-awake "~14.0.2"
-    expo-modules-autolinking "2.0.6"
+    expo-modules-autolinking "2.0.7"
     expo-modules-core "2.1.4"
     fbemitter "^3.0.0"
     web-streams-polyfill "^3.3.2"
@@ -3918,6 +3954,11 @@ ini@~1.3.0:
   version "1.3.8"
   resolved "https://registry.npmjs.org/ini/-/ini-1.3.8.tgz"
   integrity sha512-JV/yugV2uzW5iMRSiZAyDtQd+nxtUnjeLt0acNdw98kKLrvuRVyB80tsREOE7yvGVgalhZ6RNXCmEHkUKBKxew==
+
+install@^0.13.0:
+  version "0.13.0"
+  resolved "https://registry.yarnpkg.com/install/-/install-0.13.0.tgz#6af6e9da9dd0987de2ab420f78e60d9c17260776"
+  integrity sha512-zDml/jzr2PKU9I8J/xyZBQn8rPCAY//UOYNmR01XwNwyfhEWObo2SWfSl1+0tm1u6PhxLwDnfsT/6jB7OUxqFA==
 
 internal-ip@^4.3.0:
   version "4.3.0"
@@ -5629,6 +5670,13 @@ react-native-gesture-handler@~2.20.2:
     hoist-non-react-statics "^3.3.0"
     invariant "^2.2.4"
     prop-types "^15.7.2"
+
+react-native-maps@^1.20.1:
+  version "1.20.1"
+  resolved "https://registry.yarnpkg.com/react-native-maps/-/react-native-maps-1.20.1.tgz#f613364886b2f72db56cafcd2bd7d3a35f470dfb"
+  integrity sha512-NZI3B5Z6kxAb8gzb2Wxzu/+P2SlFIg1waHGIpQmazDSCRkNoHNY4g96g+xS0QPSaG/9xRBbDNnd2f2/OW6t6LQ==
+  dependencies:
+    "@types/geojson" "^7946.0.13"
 
 react-native-safe-area-context@^5.1.0:
   version "5.1.0"

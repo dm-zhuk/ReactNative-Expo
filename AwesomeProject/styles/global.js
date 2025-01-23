@@ -1,4 +1,8 @@
 export const colors = {
+  fontFamily: "Roboto",
+  fontStyle: "normal",
+  lineHeight: "normal",
+  letterSpacong: 0.3,
   white: "#FFFFFF",
   black_primary: "#212121",
   light_gray: "#F6F6F6",

@@ -1,7 +1,7 @@
 import * as React from "react";
 import Svg, { SvgProps, Path } from "react-native-svg";
 
-const LogoutSvg = (props) => (
+const LogOutIcon = (props) => (
   <Svg {...props} width={24} height={24} fill="none">
     <Path
       stroke="#BDBDBD"
@@ -12,4 +12,4 @@ const LogoutSvg = (props) => (
   </Svg>
 );
 
-export default LogoutSvg;
+export default LogOutIcon;

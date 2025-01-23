@@ -1,10 +1,9 @@
-import { StyleSheet, TouchableOpacity } from "react-native";
-
-import { colors } from "../../styles/global";
+import { TouchableOpacity, StyleSheet } from "react-native";
+import { colors } from "../styles/global";
 
 const Button = ({ children, onPress, buttonStyle }) => {
   return (
-    <TouchableOpacity style={[style.button, buttonStyle]} onPress={onPress}>
+    <TouchableOpacity style={[styles.button, buttonStyle]} onPress={onPress}>
       {children}
     </TouchableOpacity>
   );
@@ -12,7 +11,7 @@ const Button = ({ children, onPress, buttonStyle }) => {
 
 export default Button;
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
   button: {
     borderRadius: 100,
     backgroundColor: colors.orange,

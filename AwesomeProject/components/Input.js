@@ -1,6 +1,6 @@
+import { useState } from "react";
 import { StyleSheet, TextInput, View } from "react-native";
 import { colors } from "../styles/global";
-import { useState } from "react";
 
 const Input = ({
   value,
@@ -8,24 +8,16 @@ const Input = ({
   placeholder,
   outerStyles,
   rightButton,
-  autoFocus = false,
-  secureTextEntry = false,
+  secureTextEntry,
+  onFocus,
+  onBlur,
+  isFocused,
 }) => {
-  const [isFocused, setIsFocused] = useState(false);
-
-  const onFocus = () => {
-    setIsFocused(true);
-  };
-
-  const onBlur = () => {
-    setIsFocused(false);
-  };
-
   return (
-    <View style={[styles.input, isFocused && styles.focused, outerStyles]}>
+    <View
+      style={[styles.inputContainer, isFocused && styles.focused, outerStyles]}>
       <TextInput
         value={value}
-        autoFocus={autoFocus}
         onChangeText={onTextChange}
         placeholder={placeholder}
         secureTextEntry={secureTextEntry}
@@ -34,28 +26,33 @@ const Input = ({
         onFocus={onFocus}
         onBlur={onBlur}
       />
-      {rightButton}
+      {rightButton && (
+        <View style={styles.rightButtonContainer}>{rightButton}</View>
+      )}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  input: {
-    padding: 16,
-    height: 50,
-    borderRadius: 16,
+  inputContainer: {
+    flexDirection: "row",
+    alignItems: "center",
     borderWidth: 1,
     borderColor: colors.border_gray,
+    borderRadius: 16,
+    paddingHorizontal: 16,
     backgroundColor: colors.light_gray,
   },
   baseText: {
-    fontWeight: "400",
+    flex: 1,
+    paddingVertical: 10,
     fontSize: 16,
-    lineHeight: 18,
     color: colors.black_primary,
   },
+  rightButtonContainer: {
+    marginLeft: 16,
+  },
   focused: {
-    backgroundColor: colors.white,
     borderColor: colors.orange,
   },
 });

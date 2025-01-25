@@ -1,6 +1,10 @@
-import { ActivityIndicator, StyleSheet, View } from "react-native";
+import {
+  ActivityIndicator,
+  StyleSheet,
+  ImageBackground,
+  View,
+} from "react-native";
 import { useEffect } from "react";
-import { useState } from "react";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import RegistrationScreen from "./screens/RegistrationScreen";
@@ -28,36 +32,26 @@ export default function App() {
     return <ActivityIndicator size="large" />;
   }
 
-  return <RegistrationScreen />;
+  return (
+    <View style={styles.container}>
+      <ImageBackground
+        source={require("./assets/images/background-img.png")}
+        resizeMode="cover"
+        style={styles.image}>
+        <RegistrationScreen />
+        {/* <LoginScreen /> */}
+      </ImageBackground>
+    </View>
+  );
 }
 
-/* if (!fontsLoaded) {
-    return (
-      <View style={styles.loader}>
-        <ActivityIndicator size="large" />
-      </View>
-    );
-  }
-
-  const [isLogin, setIsLogin] = useState(false);
-  const goToLogin = () => setIsLogin(true);
-  const goToRegistration = () => setIsLogin(false);
-
-  return (
-    <>
-      {isLogin ? (
-        <LoginScreen goToRegistration={goToRegistration} />
-      ) : (
-        <RegistrationScreen goToLogin={goToLogin} />
-      )}
-    </>
-  );
-} */
-
 const styles = StyleSheet.create({
-  loader: {
+  container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+    backgroundColor: "#fff",
+  },
+  image: {
+    flex: 1,
+    justifyContent: "flex-end",
   },
 });

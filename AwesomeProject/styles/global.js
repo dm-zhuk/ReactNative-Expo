@@ -1,13 +1,31 @@
+import { StyleSheet } from "react-native";
+
 export const colors = {
-  fontFamily: "Roboto",
-  fontStyle: "normal",
-  lineHeight: "normal",
-  letterSpacong: 0.3,
   white: "#FFFFFF",
   black_primary: "#212121",
   light_gray: "#F6F6F6",
+  text_gray: "#BDBDBD",
   border_gray: "#E8E8E8",
   blue: "#1B4371",
   orange: "#FF6C00",
-  text_gray: "#BDBDBD",
 };
+
+export const baseStyles = StyleSheet.create({
+  title: {
+    fontSize: 30,
+    fontWeight: "500",
+    lineHeight: 36,
+    textAlign: "center",
+  },
+  baseText: {
+    fontWeight: "400",
+    fontSize: 16,
+    lineHeight: 18,
+  },
+  linkText: {
+    color: colors.blue,
+  },
+  underline: {
+    textDecorationLine: "underline",
+  },
+});

@@ -1,91 +1,67 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
-  View,
-  Text,
-  Pressable,
+  Dimensions,
   Keyboard,
-  ImageBackground,
   KeyboardAvoidingView,
-  Platform,
+  Pressable,
+  StyleSheet,
+  Text,
   TouchableWithoutFeedback,
-  TouchableOpacity,
+  View,
 } from "react-native";
+
+import { colors, baseStyles } from "../styles/global";
 import Input from "../components/Input";
 import Button from "../components/Button";
+import PasswordInput from "../components/PasswordInput";
 
-const LoginScreen = ({ goToRegistration }) => {
-  const [formState, setFormState] = useState({
-    email: "",
-    password: "",
-    login: "",
-  });
-  const [isSecurePass, setIsSecurePass] = useState(true);
+const { width: SCREEN_WIDTH } = Dimensions.get("screen");
 
-  const handleChange = (key, value) => {
-    setFormState((prevState) => ({
-      ...prevState,
-      [key]: value,
-    }));
-  };
+const LoginScreen = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const onLogin = () => {
-    console.log("formData:", formState);
+    console.log("Credentials", `email: ${email}, password: ${password}`);
   };
 
-  const onSignUp = () => {
-    goToRegistration();
+  const onRegister = () => {
+    console.log("Login");
   };
-
-  const showButton = (
-    <TouchableOpacity onPress={() => setIsSecurePass(!isSecurePass)}>
-      <Text style={[styles.baseText, styles.passwordButtonText]}>Показати</Text>
-    </TouchableOpacity>
-  );
 
   return (
     <Pressable style={{ flex: 1 }} onPress={() => Keyboard.dismiss()}>
-      <ImageBackground
-        source={require("../assets/images/background-img.png")}
-        resizeMode="cover"
-        style={styles.image}
-      />
-
-      <KeyboardAvoidingView
-        style={styles.container}
-        behavior={Platform.OS == "ios" ? "padding" : "height"}>
+      <KeyboardAvoidingView style={styles.container}>
         <View style={styles.formContainer}>
-          <Text style={styles.title}>Увійти</Text>
+          <Text style={baseStyles.title}>Увійти</Text>
 
           <View style={[styles.innerContainer, styles.inputContainer]}>
             <Input
-              value={formState.email}
-              autofocus={true}
+              value={email}
+              autoFocus={true}
               placeholder="Адреса електронної пошти"
-              onTextChange={(value) => handleChange("email", value)}
+              onTextChange={setEmail}
             />
 
-            <Input
-              value={formState.password}
-              placeholder={"Пароль"}
-              rightButton={showButton}
-              outerStyles={styles.passwordButton}
-              onTextChange={(value) => handleChange("password", value)}
-              secureTextEntry={isSecurePass}
+            <PasswordInput
+              value={password}
+              placeholder="Пароль"
+              onTextChange={setPassword}
             />
           </View>
 
           <View style={[styles.innerContainer, styles.buttonContainer]}>
             <Button onPress={onLogin}>
-              <Text style={[styles.baseText, styles.loginButtonText]}>
+              <Text style={[baseStyles.baseText, styles.buttonText]}>
                 Увійти
               </Text>
             </Button>
 
-            <View style={styles.signUpContainer}>
-              <Text style={[styles.baseText, styles.passwordButtonText]}>
-                Немає акаунту?
-                <TouchableWithoutFeedback onPress={onSignUp}>
-                  <Text style={styles.signUpText}> Зареєструватися</Text>
+            <View style={styles.loginContainer}>
+              <Text style={[baseStyles.baseText, baseStyles.linkText]}>
+                Немає акаунту?&ensp;
+                <TouchableWithoutFeedback onPress={onRegister}>
+                  <Text style={baseStyles.underline}>Зареєструватися</Text>
                 </TouchableWithoutFeedback>
               </Text>
             </View>
@@ -95,5 +71,40 @@ const LoginScreen = ({ goToRegistration }) => {
     </Pressable>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "flex-end",
+  },
+  innerContainer: {
+    gap: 16,
+  },
+  inputContainer: {
+    marginTop: 32,
+  },
+  buttonContainer: {
+    marginTop: 42,
+  },
+  formContainer: {
+    width: SCREEN_WIDTH,
+    height: "50%",
+    backgroundColor: colors.white,
+    borderTopRightRadius: 25,
+    borderTopLeftRadius: 25,
+    paddingHorizontal: 16,
+    paddingTop: 32,
+  },
+  buttonText: {
+    color: colors.white,
+    textAlign: "center",
+  },
+  loginContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+});
 
 export default LoginScreen;

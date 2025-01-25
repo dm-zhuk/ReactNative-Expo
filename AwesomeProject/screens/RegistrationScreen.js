@@ -86,8 +86,6 @@ const RegistrationScreen = () => {
   );
 };
 
-export default RegistrationScreen;
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -137,3 +135,5 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
+
+export default RegistrationScreen;

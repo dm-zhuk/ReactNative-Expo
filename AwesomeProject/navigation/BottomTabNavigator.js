@@ -6,7 +6,8 @@ import PostsScreen from "../screens/PostsScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import CreatePostsScreen from "../screens/CreatePostsScreen";
 import Feather from "@expo/vector-icons/Feather";
-import NewIcon from "../icons/NewIcon";
+import NewIconActive from "../icons/NewIconActive";
+import NewIconDefault from "../icons/NewIconDefault";
 import { colors } from "../styles/global";
 import { styles } from "../styles/local";
 
@@ -24,8 +25,6 @@ const BottomTabNavigator = () => {
         headerTitleAlign: "center",
         tabBarShowLabel: false,
         tabBarStyle: styles.tabBar,
-        tabBarItemStyle: styles.tabIcon,
-        tabBarActiveBackgroundColor: colors.orange,
       }}
       backBehavior="history">
       <Tab.Screen
@@ -47,7 +46,7 @@ const BottomTabNavigator = () => {
             <Feather
               name="grid"
               size={24}
-              color={focused ? colors.white : colors.black_80}
+              color={focused ? colors.orange : colors.black_80}
             />
           ),
         })}
@@ -63,14 +62,8 @@ const BottomTabNavigator = () => {
               <Feather name="arrow-left" size={24} color={colors.text_gray} />
             </TouchableOpacity>
           ),
-          tabBarIcon: ({ focused }) => (
-            // <Feather
-            //   name="plus"
-            //   size={24}
-            //   color={focused ? colors.white : colors.black_80}
-            //   />
-            <NewIcon />
-          ),
+          tabBarIcon: ({ focused }) =>
+            focused ? <NewIconActive /> : <NewIconDefault />,
         })}
       />
 
@@ -93,7 +86,7 @@ const BottomTabNavigator = () => {
             <Feather
               name="user"
               size={24}
-              color={focused ? colors.white : colors.black_80}
+              color={focused ? colors.orange : colors.black_80}
             />
           ),
         })}

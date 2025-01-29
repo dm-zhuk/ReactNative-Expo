@@ -1,6 +1,6 @@
 import * as React from "react";
 import Svg, { G, Rect, Path, Defs, ClipPath } from "react-native-svg";
-const NewIcon = (props) => (
+const NewIconActive = (props) => (
   <Svg
     xmlns="http://www.w3.org/2000/svg"
     width={70}
@@ -23,4 +23,4 @@ const NewIcon = (props) => (
     </Defs>
   </Svg>
 );
-export default NewIcon;
+export default NewIconActive;

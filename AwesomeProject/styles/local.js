@@ -105,7 +105,7 @@ export const styles = StyleSheet.create({
   },
   tabBar: {
     borderTopWidth: 1,
-    borderTopColor: colors.underline_grey,
+    borderTopColor: colors.text_gray,
     height: 83,
     paddingTop: 9,
     paddingRight: 70,
@@ -113,7 +113,7 @@ export const styles = StyleSheet.create({
   },
   tabHeader: {
     borderBottomWidth: 1,
-    borderBottomColor: colors.underline_grey,
+    borderBottomColor: colors.text_gray,
   },
   tabHeaderTitle: {
     fontWeight: 500,
@@ -129,3 +129,5 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
+
+/*  */

@@ -5,39 +5,14 @@ import { TouchableOpacity } from "react-native";
 import PostsScreen from "../screens/PostsScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import CreatePostsScreen from "../screens/CreatePostsScreen";
-import {
-  AntDesign,
-  Ionicons,
-  Feather,
-  MaterialIcons,
-} from "@expo/vector-icons";
+import Feather from "@expo/vector-icons/Feather";
+import NewIcon from "../icons/NewIcon";
 import { colors } from "../styles/global";
 import { styles } from "../styles/local";
 
 const Tab = createBottomTabNavigator();
 
 const BottomTabNavigator = () => {
-  const screenOptions = (navigation, iconName, tabTitle) => ({
-    title: tabTitle,
-    headerRight: () => (
-      <TouchableOpacity style={styles.logoutBtn}>
-        <MaterialIcons
-          name="logout"
-          size={24}
-          color={colors.underline_grey}
-          onPress={() => navigation.navigate("Login", { screen: "Login" })}
-        />
-      </TouchableOpacity>
-    ),
-    tabBarIcon: ({ focused }) => (
-      <AntDesign
-        name={iconName}
-        size={24}
-        color={focused ? colors.white : colors.underline_grey}
-      />
-    ),
-  });
-
   return (
     <Tab.Navigator
       initialRouteName="PostsScreen"
@@ -49,16 +24,35 @@ const BottomTabNavigator = () => {
         headerTitleAlign: "center",
         tabBarShowLabel: false,
         tabBarStyle: styles.tabBar,
+        tabBarItemStyle: styles.tabIcon,
         tabBarActiveBackgroundColor: colors.orange,
       }}
       backBehavior="history">
       <Tab.Screen
         name="PostsScreen"
         component={PostsScreen}
-        options={({ navigation }) =>
-          screenOptions(navigation, "appstore-o", "Публікації")
-        }
+        options={({ navigation }) => ({
+          title: "Публікації",
+          headerRight: () => (
+            <TouchableOpacity style={styles.logoutBtn}>
+              <Feather
+                name="log-out"
+                size={24}
+                color={colors.text_gray}
+                onPress={() => navigation.navigate("Login")}
+              />
+            </TouchableOpacity>
+          ),
+          tabBarIcon: ({ focused }) => (
+            <Feather
+              name="grid"
+              size={24}
+              color={focused ? colors.white : colors.black_80}
+            />
+          ),
+        })}
       />
+
       <Tab.Screen
         name="CreatePostsScreen"
         component={CreatePostsScreen}
@@ -66,26 +60,43 @@ const BottomTabNavigator = () => {
           title: "Створити публікацію",
           headerLeft: () => (
             <TouchableOpacity onPress={() => navigation.goBack()}>
-              <Ionicons
-                name="arrow-back"
+              <Feather name="arrow-left" size={24} color={colors.text_gray} />
+            </TouchableOpacity>
+          ),
+          tabBarIcon: ({ focused }) => (
+            // <Feather
+            //   name="plus"
+            //   size={24}
+            //   color={focused ? colors.white : colors.black_80}
+            //   />
+            <NewIcon />
+          ),
+        })}
+      />
+
+      <Tab.Screen
+        name="ProfileScreen"
+        component={ProfileScreen}
+        options={({ navigation }) => ({
+          title: "",
+          headerRight: () => (
+            <TouchableOpacity style={styles.logoutBtn}>
+              <Feather
+                name="log-out"
                 size={24}
-                color={colors.underline_grey}
+                color={colors.text_gray}
+                onPress={() => navigation.navigate("Login")}
               />
             </TouchableOpacity>
           ),
           tabBarIcon: ({ focused }) => (
-            <AntDesign
-              name="plus"
+            <Feather
+              name="user"
               size={24}
-              color={focused ? colors.white : colors.underline_grey}
+              color={focused ? colors.white : colors.black_80}
             />
           ),
         })}
-      />
-      <Tab.Screen
-        name="ProfileScreen"
-        component={ProfileScreen}
-        options={({ navigation }) => screenOptions(navigation, "user", "")}
       />
     </Tab.Navigator>
   );

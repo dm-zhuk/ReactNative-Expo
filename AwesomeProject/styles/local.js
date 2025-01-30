@@ -1,6 +1,7 @@
 import { Dimensions, StyleSheet } from "react-native";
 import { colors } from "./global";
-const { width: SCREEN_WIDTH } = Dimensions.get("screen");
+
+export const SCREEN_WIDTH = Dimensions.get("screen").width;
 
 export const styles = StyleSheet.create({
   container: {
@@ -31,6 +32,7 @@ export const styles = StyleSheet.create({
   },
   formContainer: {
     width: SCREEN_WIDTH,
+    height: "70%",
     backgroundColor: colors.white,
     borderTopRightRadius: 25,
     borderTopLeftRadius: 25,
@@ -39,6 +41,7 @@ export const styles = StyleSheet.create({
   },
   formContainerLogin: {
     width: SCREEN_WIDTH,
+    height: "50%",
     backgroundColor: colors.white,
     borderTopRightRadius: 25,
     borderTopLeftRadius: 25,
@@ -57,12 +60,17 @@ export const styles = StyleSheet.create({
   },
   plusIcon: {
     position: "absolute",
-    bottom: 14,
     right: -12,
+    bottom: 14,
+    width: 25,
+    height: 25,
   },
   image: {
-    flex: 1,
-    justifyContent: "flex-end",
+    position: "absolute",
+    top: 0,
+    bottom: 0,
+    height: "100%",
+    width: "100%",
   },
   innerScreenContainer: {
     flex: 1,

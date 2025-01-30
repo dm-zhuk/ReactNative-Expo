@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import { styles } from "../styles/local";
 
-const { width: SCREEN_WIDTH } = Dimensions.get("screen");
+export const SCREEN_WIDTH = Dimensions.get("screen").width;
 
 const CommentsScreen = () => {
   return (
@@ -29,6 +29,7 @@ const CommentsScreen = () => {
 
 const styles = StyleSheet.create({
   formContainer: {
+    width: SCREEN_WIDTH,
     height: "60%",
   },
 });

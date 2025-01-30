@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import {
-  ImageBackground,
+  Image,
   Keyboard,
   KeyboardAvoidingView,
   Platform,
@@ -17,11 +17,9 @@ import { styles } from "../styles/local";
 const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isKeyboardVisible, setIsKeyboardVisible] = useState(false);
 
   const handleEmailChange = (value) => {
     setEmail(value);
-    setIsKeyboardVisible(true);
   };
 
   const handlePasswordChange = (value) => {
@@ -37,19 +35,18 @@ const LoginScreen = ({ navigation }) => {
   };
 
   return (
-    <ImageBackground
-      source={require("../assets/images/background-img.png")}
-      resizeMode="cover"
-      style={styles.image}>
-      <Pressable style={{ flex: 1 }} onPress={() => Keyboard.dismiss()}>
+    <Pressable style={{ flex: 1 }} onPress={() => Keyboard.dismiss()}>
+      <>
+        <Image
+          source={require("../assets/images/background-img.png")}
+          resizeMode="cover"
+          style={styles.image}
+        />
+
         <KeyboardAvoidingView
           style={styles.container}
-          behavior={Platform.OS === "ios" ? "padding" : "height"}>
-          <View
-            style={{
-              ...styles.formContainerLogin,
-              height: isKeyboardVisible ? "50%" : "55%",
-            }}>
+          behavior={Platform.OS == "ios" ? "padding" : "height"}>
+          <View style={styles.formContainerLogin}>
             <Text style={styles.title}>Увійти</Text>
 
             <View style={[styles.innerContainer, styles.inputContainer]}>
@@ -83,8 +80,8 @@ const LoginScreen = ({ navigation }) => {
             </View>
           </View>
         </KeyboardAvoidingView>
-      </Pressable>
-    </ImageBackground>
+      </>
+    </Pressable>
   );
 };
 

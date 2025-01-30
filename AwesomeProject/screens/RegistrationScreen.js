@@ -1,38 +1,39 @@
 import React, { useState } from "react";
 import {
-  ImageBackground,
+  Image,
   Keyboard,
   KeyboardAvoidingView,
   Platform,
+  Pressable,
   Text,
   TouchableWithoutFeedback,
   View,
 } from "react-native";
-import { styles } from "../styles/local";
 import Input from "../components/Input";
 import Button from "../components/Button";
 import CirclePlusIcon from "../icons/CirclePlusIcon";
 import PasswordInput from "../components/PasswordInput";
+import { styles } from "../styles/local";
 
 const RegistrationScreen = ({ navigation }) => {
   const [login, setLogin] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [keyboardVisible, setKeyboardVisible] = useState(false);
+
+  const handleAddAvatar = () => {
+    console.log("AddAvatar");
+  };
 
   const handleLoginChange = (value) => {
     setLogin(value);
-    setKeyboardVisible(true);
   };
 
   const handleEmailChange = (value) => {
     setEmail(value);
-    setKeyboardVisible(true);
   };
 
   const handlePasswordChange = (value) => {
     setPassword(value);
-    setKeyboardVisible(true);
   };
 
   const onRegister = () => {
@@ -44,21 +45,22 @@ const RegistrationScreen = ({ navigation }) => {
   };
 
   return (
-    <ImageBackground
-      source={require("../assets/images/background-img.png")}
-      resizeMode="cover"
-      style={styles.image}>
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+    <Pressable style={{ flex: 1 }} onPress={() => Keyboard.dismiss()}>
+      <>
+        <Image
+          source={require("../assets/images/background-img.png")}
+          resizeMode="cover"
+          style={styles.image}
+        />
+
         <KeyboardAvoidingView
           style={styles.container}
-          behavior={Platform.OS === "ios" ? "padding" : "height"}>
-          <View
-            style={{
-              ...styles.formContainer,
-              height: keyboardVisible ? "60%" : "77%",
-            }}>
+          behavior={Platform.OS == "ios" ? "padding" : "height"}>
+          <View style={styles.formContainer}>
             <View style={styles.avatarContainer}>
-              <CirclePlusIcon width="25" height="25" style={styles.plusIcon} />
+              <Pressable onPress={handleAddAvatar} style={styles.plusIcon}>
+                <CirclePlusIcon />
+              </Pressable>
             </View>
             <Text style={styles.title}>Реєстрація</Text>
 
@@ -101,8 +103,8 @@ const RegistrationScreen = ({ navigation }) => {
             </View>
           </View>
         </KeyboardAvoidingView>
-      </TouchableWithoutFeedback>
-    </ImageBackground>
+      </>
+    </Pressable>
   );
 };
 

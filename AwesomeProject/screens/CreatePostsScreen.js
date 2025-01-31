@@ -1,4 +1,11 @@
 import React from "react";
+import "react-native-get-random-values";
+import Feather from "@expo/vector-icons/Feather";
+import "react-native-get-random-values";
+import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
+import * as ImagePicker from 'expo-image-picker';
+import 'react-native-get-random-values'
+import { nanoid } from 'nanoid'
 import {
   Keyboard,
   KeyboardAvoidingView,

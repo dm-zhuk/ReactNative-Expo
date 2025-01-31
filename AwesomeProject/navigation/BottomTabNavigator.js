@@ -2,7 +2,8 @@ import "react-native-gesture-handler";
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { TouchableOpacity } from "react-native";
-import PostsScreen from "../screens/PostsScreen";
+import MapScreen from "../screens/MapScreen";
+// import PostsScreen from "../screens/PostsScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import CreatePostsScreen from "../screens/CreatePostsScreen";
 import Feather from "@expo/vector-icons/Feather";
@@ -16,7 +17,8 @@ const Tab = createBottomTabNavigator();
 const BottomTabNavigator = () => {
   return (
     <Tab.Navigator
-      initialRouteName="PostsScreen"
+      // initialRouteName="PostsScreen"
+      initialRouteName="CreatePostsScreen"
       screenOptions={{
         headerRightContainerStyle: { paddingRight: 16 },
         headerLeftContainerStyle: { paddingLeft: 16 },
@@ -27,7 +29,25 @@ const BottomTabNavigator = () => {
         tabBarStyle: styles.tabBar,
       }}
       backBehavior="history">
+      
       <Tab.Screen
+        name="Map"
+        component={MapScreen}
+        options={({ navigation }) => ({
+          title: "Map",
+          headerLeft: () => (
+            <TouchableOpacity onPress={() => navigation.goBack()}>
+              <Feather name="arrow-left" size={24} color={colors.text_gray} />
+            </TouchableOpacity>
+          ),
+          tabBarIcon: ({ focused }) => (
+            <Feather name="map" size={24}
+              color={focused ? colors.orange : colors.black_80}
+            />
+          ),
+        })}
+      />
+      {/* <Tab.Screen
         name="PostsScreen"
         component={PostsScreen}
         options={({ navigation }) => ({
@@ -50,7 +70,7 @@ const BottomTabNavigator = () => {
             />
           ),
         })}
-      />
+      /> */}
 
       <Tab.Screen
         name="CreatePostsScreen"

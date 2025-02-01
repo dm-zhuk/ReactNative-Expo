@@ -35,15 +35,14 @@ const MapScreen = () => {
         }}
         mapType="standard"
         onMapReady={() => console.log("Map is ready")}
-        onLongPress={(e) => setLocation(e.nativeEvent.coordinate)}
-      >
+        onLongPress={(e) => setLocation(e.nativeEvent.coordinate)}>
         {location && (
           <Marker
             coordinate={{
               latitude: location.latitude,
               longitude: location.longitude,
             }}
-            title="You are here"
+            title="You're here"
             description="Current location"
             draggable
           />

@@ -116,8 +116,8 @@ export const styles = StyleSheet.create({
     borderTopColor: colors.text_gray,
     height: 83,
     paddingTop: 9,
-    paddingRight: 70,
-    paddingLeft: 70,
+    paddingRight: 48,
+    paddingLeft: 48,
   },
   tabHeader: {
     borderBottomWidth: 1,

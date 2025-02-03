@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import Input from "../components/Input";
 import Button from "../components/Button";
-import CirclePlusIcon from "../icons/CirclePlusIcon";
+import CircleCloseIcon from "../icons/CircleCloseIcon.js";
 import PasswordInput from "../components/PasswordInput";
 import { styles } from "../styles/local";
 
@@ -58,8 +58,12 @@ const RegistrationScreen = ({ navigation }) => {
           behavior={Platform.OS == "ios" ? "padding" : "height"}>
           <View style={styles.formContainer}>
             <View style={styles.avatarContainer}>
-              <Pressable onPress={handleAddAvatar} style={styles.plusIcon}>
-                <CirclePlusIcon />
+              <Image
+                source={require("../assets/images/avatar.png")}
+                resizeMode="cover"
+              />
+              <Pressable onPress={handleAddAvatar} style={styles.closeIcon}>
+                <CircleCloseIcon />
               </Pressable>
             </View>
             <Text style={styles.title}>Реєстрація</Text>

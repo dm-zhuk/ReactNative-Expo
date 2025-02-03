@@ -3,7 +3,7 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { TouchableOpacity } from "react-native";
 import MapScreen from "../screens/MapScreen";
-// import PostsScreen from "../screens/PostsScreen";
+import PostsScreen from "../screens/PostsScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import CreatePostsScreen from "../screens/CreatePostsScreen";
 import Feather from "@expo/vector-icons/Feather";
@@ -17,19 +17,20 @@ const Tab = createBottomTabNavigator();
 const BottomTabNavigator = () => {
   return (
     <Tab.Navigator
-      // initialRouteName="PostsScreen"
-      initialRouteName="CreatePostsScreen"
-      screenOptions={{
+      initialRouteName="Posts"
+      screenOptions={({ route }) => ({
         headerRightContainerStyle: { paddingRight: 16 },
         headerLeftContainerStyle: { paddingLeft: 16 },
         headerStyle: styles.tabHeader,
         headerTitleStyle: styles.tabHeaderTitle,
         headerTitleAlign: "center",
         tabBarShowLabel: false,
-        tabBarStyle: styles.tabBar,
-      }}
+        tabBarStyle:
+          route.name === "CreatePostsScreen"
+            ? { display: "none" }
+            : styles.tabBar,
+      })}
       backBehavior="history">
-      
       <Tab.Screen
         name="Map"
         component={MapScreen}
@@ -41,14 +42,17 @@ const BottomTabNavigator = () => {
             </TouchableOpacity>
           ),
           tabBarIcon: ({ focused }) => (
-            <Feather name="map" size={24}
+            <Feather
+              name="map"
+              size={24}
               color={focused ? colors.orange : colors.black_80}
             />
           ),
         })}
       />
-      {/* <Tab.Screen
-        name="PostsScreen"
+
+      <Tab.Screen
+        name="Posts"
         component={PostsScreen}
         options={({ navigation }) => ({
           title: "Публікації",
@@ -70,7 +74,7 @@ const BottomTabNavigator = () => {
             />
           ),
         })}
-      /> */}
+      />
 
       <Tab.Screen
         name="CreatePostsScreen"

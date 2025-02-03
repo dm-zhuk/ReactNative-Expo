@@ -4,7 +4,6 @@ import {
   Keyboard,
   KeyboardAvoidingView,
   Platform,
-  StyleSheet,
   Text,
   TouchableWithoutFeedback,
   View,
@@ -26,12 +25,5 @@ const CommentsScreen = () => {
     </TouchableWithoutFeedback>
   );
 };
-
-const styles = StyleSheet.create({
-  formContainer: {
-    width: SCREEN_WIDTH,
-    height: "60%",
-  },
-});
 
 export default CommentsScreen;

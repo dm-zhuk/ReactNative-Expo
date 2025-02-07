@@ -16,9 +16,7 @@ const StackNavigator = () => {
       <Stack.Screen
         name="Home"
         component={BottomTabNavigator}
-        options={{
-          title: "",
-        }}
+        options={{ title: "" }}
       />
     </Stack.Navigator>
   );

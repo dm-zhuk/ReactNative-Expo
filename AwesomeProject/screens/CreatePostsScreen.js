@@ -2,7 +2,11 @@ import React, { useState, useRef, useEffect } from "react";
 import * as MediaLibrary from "expo-media-library";
 import * as Location from "expo-location";
 import * as ImagePicker from "expo-image-picker";
+import "react-native-get-random-values";
+import { nanoid } from "nanoid";
 import { CameraView, useCameraPermissions } from "expo-camera";
+import { addPost } from "../firebase/firestore";
+import { useAppContext } from "../context/AppContext";
 import Feather from "@expo/vector-icons/Feather";
 import { colors } from "../styles/global";
 import { styles } from "../styles/local";
@@ -19,10 +23,15 @@ import {
   Button,
 } from "react-native";
 
-const CreatePostsScreen = ({ navigation, posts, setPosts }) => {
-  const [post, setPost] = useState({ photo: "", title: "", place: "" });
+const CreatePostsScreen = ({ navigation }) => {
+  const { posts, setPosts } = useAppContext();
+  const initialPost = { photo: "", title: "", place: "" };
+  const [post, setPost] = useState(initialPost);
   const [permission, requestPermission] = useCameraPermissions();
-  const cameraRef = useRef(null);
+  const camera = useRef(null);
+  const [errorMsg, setErrorMsg] = useState(null);
+
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -45,12 +54,16 @@ const CreatePostsScreen = ({ navigation, posts, setPosts }) => {
     );
   }
 
+  const keyboardHide = () => {
+    Keyboard.dismiss();
+  };
+
   const updatePost = (key, value) =>
     setPost((prev) => ({ ...prev, [key]: value }));
 
   const takePicture = async () => {
-    if (!cameraRef.current) return;
-    const { uri } = await cameraRef.current.takePictureAsync();
+    if (!camera.current) return;
+    const { uri } = await camera.current.takePictureAsync();
     await MediaLibrary.saveToLibraryAsync(uri);
     updatePost("photo", uri);
   };
@@ -72,15 +85,32 @@ const CreatePostsScreen = ({ navigation, posts, setPosts }) => {
     }
   };
 
-  const onSubmit = async () => {
+  const onPublish = async () => {
     const { coords } = await Location.getCurrentPositionAsync({});
-    const newPost = { ...post, coords };
-    setPosts((prevPosts) => [...prevPosts, newPost]);
-    navigation.navigate("Posts");
-    setPost({ photo: "", title: "", place: "" });
+    const newPost = {
+      ...post,
+      coords: {
+        latitude: coords.latitude,
+        longitude: coords.longitude,
+      },
+      id: nanoid(),
+    };
+
+    try {
+      setLoading(true);
+      await addPost(newPost.id, newPost);
+      setPosts((prevPosts) => [...prevPosts, newPost]);
+      navigation.navigate("PostsNavigator");
+      setPost(initialPost);
+    } catch (error) {
+      console.error("Error publishing post:", error);
+      Alert.alert("Error", "There was an error publishing your post.");
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const isAllowed = post.photo && post.title && post.place;
+  const isAllowed = !!post.photo && !!post.title && !!post.place;
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -89,7 +119,7 @@ const CreatePostsScreen = ({ navigation, posts, setPosts }) => {
           {post.photo ? (
             <Image style={styles.camera} source={{ uri: post.photo }} />
           ) : (
-            <CameraView style={styles.camera} ref={cameraRef}>
+            <CameraView style={styles.camera} ref={camera}>
               <TouchableOpacity
                 style={[
                   styles.photoBtnContainer,
@@ -141,13 +171,13 @@ const CreatePostsScreen = ({ navigation, posts, setPosts }) => {
               },
             ]}
             disabled={!isAllowed}
-            onPress={onSubmit}>
+            onPress={onPublish}>
             <Text
               style={[
                 styles.createBtnText,
                 { color: isAllowed ? colors.white : colors.text_gray },
               ]}>
-              Publish
+              Опублікувати
             </Text>
           </TouchableOpacity>
         </KeyboardAvoidingView>

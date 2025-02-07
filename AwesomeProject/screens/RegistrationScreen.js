@@ -8,17 +8,21 @@ import {
   Text,
   TouchableWithoutFeedback,
   View,
+  Alert,
 } from "react-native";
 import Input from "../components/Input";
 import Button from "../components/Button";
-import CircleCloseIcon from "../icons/CircleCloseIcon.js";
+import CircleCloseIcon from "../icons/CircleCloseIcon";
 import PasswordInput from "../components/PasswordInput";
+import { registerDB } from "../firebase/auth";
+import { validateForm } from "../utils/validateForm";
 import { styles } from "../styles/local";
 
 const RegistrationScreen = ({ navigation }) => {
   const [login, setLogin] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [avatar, setAvatar] = useState("");
 
   const handleAddAvatar = () => {
     console.log("AddAvatar");
@@ -36,8 +40,26 @@ const RegistrationScreen = ({ navigation }) => {
     setPassword(value);
   };
 
-  const onRegister = () => {
-    navigation.navigate("Home");
+  const onRegister = async () => {
+    const formData = { email, password, login, avatar };
+    const error = validateForm(formData);
+
+    if (error) {
+      Alert.alert("Validation Error", error);
+    } else {
+      console.log("Form Data:", formData);
+      try {
+        const userData = await registerDB(formData);
+        navigation.navigate("Home");
+        console.log("Register success!", userData);
+      } catch (err) {
+        Alert.alert(
+          "Registration Error",
+          err.message || "An error occurred during registration."
+        );
+        console.error("Registration error:", err);
+      }
+    }
   };
 
   const onLogin = () => {
@@ -55,7 +77,7 @@ const RegistrationScreen = ({ navigation }) => {
 
         <KeyboardAvoidingView
           style={styles.container}
-          behavior={Platform.OS == "ios" ? "padding" : "height"}>
+          behavior={Platform.OS === "ios" ? "padding" : "height"}>
           <View style={styles.formContainer}>
             <View style={styles.avatarContainer}>
               <Image
@@ -70,7 +92,7 @@ const RegistrationScreen = ({ navigation }) => {
 
             <View style={[styles.innerContainer, styles.inputContainer]}>
               <Input
-                autoFocus
+                autofocus={true}
                 value={login}
                 placeholder="Логін"
                 onTextChange={handleLoginChange}

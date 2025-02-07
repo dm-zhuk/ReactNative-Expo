@@ -1,5 +1,44 @@
-import React from "react";
+import { useEffect, useState } from "react";
+import { useIsFocused } from "@react-navigation/native";
+import { View, FlatList } from "react-native";
+import { Post } from "../components/Post";
+import { fetchAllPosts } from "../firebase/firestore";
+import { styles } from "../styles/local";
+
+const PostsScreen = ({ navigation }) => {
+  const [posts, setPosts] = useState([]);
+  const isFocused = useIsFocused();
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      const fetchedPosts = await fetchAllPosts();
+      setPosts(fetchedPosts);
+    };
+
+    if (isFocused) {
+      fetchPosts();
+    }
+  }, [isFocused]);
+
+  return (
+    <View style={styles.postsContainer}>
+      <FlatList
+        data={posts}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={({ item }) => <Post data={item} />}
+      />
+    </View>
+  );
+};
+
+export default PostsScreen;
+/* 
+import { useEffect, useState } from "react";
+import { useIsFocused } from "@react-navigation/native";
 import { Image, Text, TouchableOpacity, View, FlatList } from "react-native";
+import { Post } from "../components/Post";
+import { useAuth } from "../context/AuthContext";
+import { fetchAllPosts } from "../firebase/firestore";
 import Feather from "@expo/vector-icons/Feather";
 import { colors } from "../styles/global";
 import { styles } from "../styles/local";
@@ -56,3 +95,4 @@ const PostsScreen = ({ navigation, posts }) => {
 };
 
 export default PostsScreen;
+ */

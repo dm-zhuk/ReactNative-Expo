@@ -1,6 +1,7 @@
 import "react-native-gesture-handler";
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import PostsNavigator from "./PostsNavigator";
 import { TouchableOpacity } from "react-native";
 import MapScreen from "../screens/MapScreen";
 import PostsScreen from "../screens/PostsScreen";
@@ -17,7 +18,7 @@ const Tab = createBottomTabNavigator();
 const BottomTabNavigator = () => {
   return (
     <Tab.Navigator
-      initialRouteName="Posts"
+      initialRouteName="PostsNavigator"
       screenOptions={({ route }) => ({
         headerRightContainerStyle: { paddingRight: 16 },
         headerLeftContainerStyle: { paddingLeft: 16 },
@@ -32,28 +33,8 @@ const BottomTabNavigator = () => {
       })}
       backBehavior="history">
       <Tab.Screen
-        name="Map"
-        component={MapScreen}
-        options={({ navigation }) => ({
-          title: "Map",
-          headerLeft: () => (
-            <TouchableOpacity onPress={() => navigation.goBack()}>
-              <Feather name="arrow-left" size={24} color={colors.text_gray} />
-            </TouchableOpacity>
-          ),
-          tabBarIcon: ({ focused }) => (
-            <Feather
-              name="map"
-              size={24}
-              color={focused ? colors.orange : colors.black_80}
-            />
-          ),
-        })}
-      />
-
-      <Tab.Screen
-        name="Posts"
-        component={PostsScreen}
+        name="PostsNavigator"
+        component={PostsNavigator}
         options={({ navigation }) => ({
           title: "Публікації",
           headerRight: () => (
@@ -120,3 +101,25 @@ const BottomTabNavigator = () => {
 };
 
 export default BottomTabNavigator;
+
+{
+  /* <Tab.Screen
+        name="Map"
+        component={MapScreen}
+        options={({ navigation }) => ({
+          title: "Map",
+          headerLeft: () => (
+            <TouchableOpacity onPress={() => navigation.goBack()}>
+              <Feather name="arrow-left" size={24} color={colors.text_gray} />
+            </TouchableOpacity>
+          ),
+          tabBarIcon: ({ focused }) => (
+            <Feather
+              name="map"
+              size={24}
+              color={focused ? colors.orange : colors.black_80}
+            />
+          ),
+        })}
+      /> */
+}

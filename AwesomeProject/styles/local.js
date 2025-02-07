@@ -261,6 +261,14 @@ export const styles = StyleSheet.create({
       },
     }),
   },
+  iconContainer: {
+    backgroundColor: colors.orange,
+    flexShrink: 0,
+    borderRadius: 17,
+    padding: 8,
+    alignItems: "center",
+    justifyContent: "center",
+  },
   createBtn: {
     borderRadius: 100,
     paddingTop: 16,
@@ -326,4 +334,4 @@ export const styles = StyleSheet.create({
   },
 });
 
-/*  */
+///

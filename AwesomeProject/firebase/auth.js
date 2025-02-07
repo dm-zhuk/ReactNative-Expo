@@ -51,27 +51,26 @@ export const registerDB = async ({ login, email, password, avatar }) => {
 export const loginDB = async ({ email, password }, dispatch) => {
   try {
     const credentials = await signInWithEmailAndPassword(auth, email, password);
-    console.log(credentials);
     const user = credentials.user;
 
-    dispatch(
-      setUserInfo({
-        uid: user.uid,
-        email: user?.email || "",
-        displayName: user?.displayName || "",
-        profilePhoto: user?.photoURL || "",
-      })
-    );
-    return user;
+    const userData = await getUser(user.uid);
+    if (userData) {
+      dispatch(
+        setUserInfo({
+          ...userData,
+          uid: user.uid,
+          email: user.email || "",
+        })
+      );
+    }
   } catch (error) {
-    console.log(error);
+    console.log("Login error:", error);
   }
 };
 
 export const logoutDB = async (dispatch) => {
   try {
     await signOut(auth);
-    // clean user data in Redux
     dispatch(clearUserInfo());
   } catch (error) {
     console.error("Logout error:", error);
@@ -82,14 +81,15 @@ export const authStateChanged = (dispatch) => {
   onAuthStateChanged(auth, async (user) => {
     if (user) {
       const userData = await getUser(user.uid);
-
-      dispatch(
-        setUserInfo({
-          ...userData,
-          uid: user.uid,
-          email: user.email || "",
-        })
-      );
+      if (userData) {
+        dispatch(
+          setUserInfo({
+            ...userData,
+            uid: user.uid,
+            email: user.email || "",
+          })
+        );
+      }
     } else {
       dispatch(clearUserInfo());
     }

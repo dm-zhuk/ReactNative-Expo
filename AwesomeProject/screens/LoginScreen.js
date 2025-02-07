@@ -59,13 +59,13 @@ const LoginScreen = ({ navigation }) => {
                 value={email}
                 autofocus={true}
                 placeholder="Адреса електронної пошти"
-                onTextChange={setEmail} // Directly set email
+                onTextChange={setEmail}
               />
 
               <PasswordInput
                 value={password}
                 placeholder="Пароль"
-                onTextChange={setPassword} // Directly set password
+                onTextChange={setPassword}
               />
             </View>
 
@@ -77,10 +77,10 @@ const LoginScreen = ({ navigation }) => {
               <View style={styles.loginContainer}>
                 <Text style={[styles.baseText, styles.passwordButtonText]}>
                   Немає акаунту?&ensp;
-                  <TouchableWithoutFeedback onPress={onRegister}>
-                    <Text style={styles.linkText}>Зареєструватися</Text>
-                  </TouchableWithoutFeedback>
                 </Text>
+                <TouchableWithoutFeedback onPress={onRegister}>
+                  <Text style={styles.linkText}>Зареєструватися</Text>
+                </TouchableWithoutFeedback>
               </View>
             </View>
           </View>

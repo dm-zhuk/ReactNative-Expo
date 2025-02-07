@@ -1,27 +1,117 @@
-ProfileScreen;
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
-  Keyboard,
-  KeyboardAvoidingView,
-  Platform,
+  Image,
   Text,
-  TouchableWithoutFeedback,
+  TouchableOpacity,
   View,
+  ActivityIndicator,
+  Alert,
 } from "react-native";
+import { FlatList } from "react-native-gesture-handler";
+import { useAuth } from "../context/AuthContext";
+import { fetchAllPosts } from "../firebase/firestore";
+import Feather from "@expo/vector-icons/Feather";
+import { colors } from "../styles/global";
 import { styles } from "../styles/local";
 
-const ProfileScreen = () => {
+const PostsScreen = ({ navigation }) => {
+  const { user } = useAuth();
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const loadPosts = async () => {
+      try {
+        const fetchedPosts = await fetchAllPosts();
+        setPosts(fetchedPosts);
+      } catch (error) {
+        console.error("Error fetching posts:", error);
+        Alert.alert("Error", "There was an error fetching the posts.");
+      }
+    };
+
+    const loadData = async () => {
+      setLoading(true);
+      await loadPosts();
+      setLoading(false);
+    };
+
+    loadData();
+  }, []);
+
+  if (loading) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <ActivityIndicator size="large" color={colors.primary} />
+      </View>
+    );
+  }
+
+  const userProfilePhoto =
+    user?.profilePhoto || require("../assets/images/avatar.png");
+  const userName = user?.login || "Natali Romanova";
+
+  const renderItem = ({ item }) => (
+    <View>
+      <Image style={styles.postPhoto} source={{ uri: item.photo }} />
+      <Text style={styles.postTitle}>{item.title}</Text>
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}>
+        <TouchableOpacity
+          style={styles.commentButton}
+          onPress={() => navigation.navigate("Comments")}>
+          <Feather name="message-circle" size={24} color={colors.text_gray} />
+          <Text style={styles.counter}>0</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() =>
+            navigation.navigate("Map", {
+              latitude: item.coords?.latitude,
+              longitude: item.coords?.longitude,
+            })
+          }
+          style={{ flexDirection: "row", alignItems: "center" }}>
+          <Feather name="map-pin" size={24} color={colors.text_gray} />
+          <Text style={styles.place}>{item.place}</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
+
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <KeyboardAvoidingView
-        style={styles.innerScreenContainer}
-        behavior={Platform.OS === "ios" ? "padding" : "height"}>
-        <View>
-          <Text style={styles.baseText}>profile screen template</Text>
+    <View style={styles.postsContainer}>
+      <>
+        <Image
+          source={require("../assets/images/background-img.png")}
+          resizeMode="cover"
+          style={styles.image}
+        />
+        <View style={styles.profileContainer}>
+          <Image
+            style={styles.avatarPhoto}
+            source={userProfilePhoto}
+            resizeMode="cover"
+          />
+          <View style={styles.userData}>
+            <Text style={styles.profileName}>{userName}</Text>
+          </View>
         </View>
-      </KeyboardAvoidingView>
-    </TouchableWithoutFeedback>
+
+        <View>
+          <FlatList
+            data={posts}
+            keyExtractor={(item) => item.id.toString()}
+            ItemSeparatorComponent={() => <View style={{ height: 34 }} />}
+            renderItem={renderItem}
+          />
+        </View>
+      </>
+    </View>
   );
 };
 
-export default ProfileScreen;
+export default PostsScreen;

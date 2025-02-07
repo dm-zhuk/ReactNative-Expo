@@ -3,8 +3,6 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import PostsNavigator from "./PostsNavigator";
 import { TouchableOpacity } from "react-native";
-import MapScreen from "../screens/MapScreen";
-import PostsScreen from "../screens/PostsScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import CreatePostsScreen from "../screens/CreatePostsScreen";
 import Feather from "@expo/vector-icons/Feather";
@@ -102,8 +100,8 @@ const BottomTabNavigator = () => {
 
 export default BottomTabNavigator;
 
-{
-  /* <Tab.Screen
+/* 
+      <Tab.Screen
         name="Map"
         component={MapScreen}
         options={({ navigation }) => ({
@@ -121,5 +119,5 @@ export default BottomTabNavigator;
             />
           ),
         })}
-      /> */
-}
+      />
+       */

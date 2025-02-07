@@ -11,6 +11,7 @@ import Feather from "@expo/vector-icons/Feather";
 import { colors } from "../styles/global";
 import { styles } from "../styles/local";
 import {
+  ActivityIndicator,
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
   TouchableOpacity,
@@ -21,16 +22,15 @@ import {
   Keyboard,
   Platform,
   Button,
+  Alert,
 } from "react-native";
 
 const CreatePostsScreen = ({ navigation }) => {
   const { posts, setPosts } = useAppContext();
-  const initialPost = { photo: "", title: "", place: "" };
+  const initialPost = { photo: "", title: "", place: "", coords: null };
   const [post, setPost] = useState(initialPost);
   const [permission, requestPermission] = useCameraPermissions();
   const camera = useRef(null);
-  const [errorMsg, setErrorMsg] = useState(null);
-
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -53,10 +53,6 @@ const CreatePostsScreen = ({ navigation }) => {
       </View>
     );
   }
-
-  const keyboardHide = () => {
-    Keyboard.dismiss();
-  };
 
   const updatePost = (key, value) =>
     setPost((prev) => ({ ...prev, [key]: value }));
@@ -135,7 +131,7 @@ const CreatePostsScreen = ({ navigation }) => {
 
         <TouchableOpacity onPress={pickImage}>
           <Text style={styles.textUpload}>
-            {post.photo ? "Edit Photo" : "Upload Photo"}
+            {post.photo ? "Редагувати фото" : "Завантажте фото"}
           </Text>
         </TouchableOpacity>
 
@@ -143,26 +139,20 @@ const CreatePostsScreen = ({ navigation }) => {
           behavior={Platform.OS === "ios" ? "padding" : "height"}>
           <TextInput
             style={styles.createPostInput}
-            placeholder="Title..."
+            placeholder="Назва..."
             placeholderTextColor={colors.text_gray}
             value={post.title}
             onChangeText={(text) => updatePost("title", text)}
           />
-          <View style={{ position: "relative" }}>
-            <Feather
-              name="map-pin"
-              size={24}
-              color={colors.text_gray}
-              style={styles.pinIcon}
-            />
-            <TextInput
-              style={[styles.createPostInput, { paddingLeft: 28 }]}
-              placeholder="Location..."
-              placeholderTextColor={colors.text_gray}
-              value={post.place}
-              onChangeText={(text) => updatePost("place", text)}
-            />
-          </View>
+
+          <TextInput
+            style={styles.createPostInput}
+            placeholder="Місцевість..."
+            placeholderTextColor={colors.text_gray}
+            value={post.place}
+            onChangeText={(text) => updatePost("place", text)}
+          />
+
           <TouchableOpacity
             style={[
               styles.createBtn,
@@ -170,21 +160,24 @@ const CreatePostsScreen = ({ navigation }) => {
                 backgroundColor: isAllowed ? colors.orange : colors.light_gray,
               },
             ]}
-            disabled={!isAllowed}
+            disabled={!isAllowed || loading}
             onPress={onPublish}>
-            <Text
-              style={[
-                styles.createBtnText,
-                { color: isAllowed ? colors.white : colors.text_gray },
-              ]}>
-              Опублікувати
-            </Text>
+            {loading ? (
+              <ActivityIndicator color={colors.white} />
+            ) : (
+              <Text
+                style={[
+                  styles.createBtnText,
+                  { color: isAllowed ? colors.white : colors.text_gray },
+                ]}>
+                Опублікувати
+              </Text>
+            )}
           </TouchableOpacity>
         </KeyboardAvoidingView>
 
         <View style={styles.resetBtn}>
-          <TouchableOpacity
-            onPress={() => setPost({ photo: "", title: "", place: "" })}>
+          <TouchableOpacity onPress={() => setPost(initialPost)}>
             <Feather name="trash-2" size={24} color={colors.text_gray} />
           </TouchableOpacity>
         </View>

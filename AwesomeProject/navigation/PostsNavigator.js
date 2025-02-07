@@ -12,10 +12,10 @@ const Stack = createStackNavigator();
 const PostsNavigator = () => {
   return (
     <Stack.Navigator
-      initialRouteName="Публікації"
+      initialRouteName="Posts"
       screenOptions={{ headerShown: false }}>
       <Stack.Screen
-        name="Публікації"
+        name="Posts"
         component={PostsScreen}
         options={({ navigation }) => ({
           headerTitle: "Публікації",

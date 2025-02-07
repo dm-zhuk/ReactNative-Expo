@@ -58,6 +58,13 @@ export const styles = StyleSheet.create({
     backgroundColor: colors.light_gray,
     borderRadius: 16,
   },
+  avatarWrapper: {
+    width: 28,
+    height: 28,
+    borderRadius: 50,
+    overflow: "hidden",
+    backgroundColor: colors.border_gray,
+  },
   innerScreenContainer: {
     flex: 1,
     alignItems: "center",
@@ -195,6 +202,12 @@ export const styles = StyleSheet.create({
     width: "100%",
     marginBottom: 32,
   },
+  profileContainer: {
+    gap: 8,
+    alignItems: "center",
+    width: "100%",
+    marginBottom: 32,
+  },
   postPhoto: {
     marginBottom: 8,
     width: "100%",
@@ -305,6 +318,12 @@ export const styles = StyleSheet.create({
     fontFamily: "Roboto-Bold",
     fontSize: 13,
   },
+  profileName: {
+    color: colors.black_primary,
+    fontFamily: "Roboto-Bold",
+    fontSize: 30,
+    fontWeight: 500,
+  },
   userEmail: {
     color: colors.black_80,
     fontFamily: "Roboto-Regular",
@@ -332,6 +351,33 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
   },
+  placeholderContainer: {
+    alignItems: "center",
+    justifyContent: "center",
+    height: 200,
+    backgroundColor: colors.light_gray,
+    borderRadius: 20,
+    margin: 16,
+  },
+  placeholderText: {
+    fontSize: 18,
+    color: colors.black_primary,
+    marginBottom: 10,
+  },
+  addPostButton: {
+    backgroundColor: colors.orange,
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    borderRadius: 20,
+  },
+  addPostText: {
+    color: colors.white,
+    fontSize: 16,
+  },
+  section: {
+    flex: 1,
+    padding: 16,
+    paddingBottom: 22,
+    justifyContent: "space-between",
+  },
 });
-
-///

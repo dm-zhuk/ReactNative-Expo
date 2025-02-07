@@ -8,8 +8,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import store from "./redux/store";
-import { AuthProvider } from "./context/AuthContext";
-import { AppContextProvider } from "./context/AppContext";
+import ContextCombiner from "./context/ContextCombiner";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -36,13 +35,11 @@ export default function App() {
   return (
     <Provider store={store.store}>
       <PersistGate loading={<Loader />} persistor={store.persistor}>
-        <AuthProvider>
-          <AppContextProvider>
-            <NavigationContainer>
-              <StackNavigator />
-            </NavigationContainer>
-          </AppContextProvider>
-        </AuthProvider>
+        <ContextCombiner>
+          <NavigationContainer>
+            <StackNavigator />
+          </NavigationContainer>
+        </ContextCombiner>
       </PersistGate>
     </Provider>
   );

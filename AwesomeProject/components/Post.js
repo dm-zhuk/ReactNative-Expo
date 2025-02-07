@@ -1,6 +1,6 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { useAuth } from "../context//AuthContext";
+import { useAuth } from "../context/AuthContext";
 import Feather from "@expo/vector-icons/Feather";
 import { colors } from "../styles/global";
 

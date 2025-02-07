@@ -44,7 +44,7 @@ export const getUser = async (userId) => {
 export const updateUserInFirestore = async (uid, data) => {
   try {
     await setDoc(doc(db, "users", uid), data, { merge: true });
-    console.log("User data updated in Firestore:", uid);
+    console.log("User data updated to Firestore:", uid);
   } catch (error) {
     console.error("Error saving user data to Firestore:", error);
   }
@@ -52,7 +52,7 @@ export const updateUserInFirestore = async (uid, data) => {
 
 export const uploadImage = async (userId, file, fileName) => {
   try {
-    const imageRef = ref(storage, `profilePhotos/${userId}/${fileName}`);
+    const imageRef = ref(storage, `postPhotos/${userId}/${fileName}`);
     console.log("Uploading to:", imageRef.fullPath);
 
     const result = await uploadBytes(imageRef, file);

@@ -81,7 +81,7 @@ const RegistrationScreen = ({ navigation }) => {
           <View style={styles.formContainer}>
             <View style={styles.avatarContainer}>
               <Image
-                source={require("../assets/images/avatar.png")}
+                source={require("../assets/images/avatar-img.png")}
                 resizeMode="cover"
               />
               <Pressable onPress={handleAddAvatar} style={styles.closeIcon}>

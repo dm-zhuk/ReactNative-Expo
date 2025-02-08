@@ -48,7 +48,7 @@ const PostsScreen = ({ navigation }) => {
   }
 
   const userProfilePhoto =
-    user?.profilePhoto || require("../assets/images/avatar.png");
+    user?.profilePhoto || require("../assets/images/avatar-img.png");
   const userName = user?.login || "Natali Romanova";
 
   const renderItem = ({ item }) => (
